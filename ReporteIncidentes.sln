@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReporteIncidentes.WebAPI", "ReporteIncidentes.WebAPI\ReporteIncidentes.WebAPI.csproj", "{B79572F8-CCB6-49DA-8633-38F14F424B01}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReporteIncidentes.Web.UI", "ReporteIncidentes.Web.UI\ReporteIncidentes.Web.UI.csproj", "{2ED75092-ADD4-4517-B071-9946E1E27338}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReporteIncidentes.WebAPI", "ReporteIncidentes.WebAPI\ReporteIncidentes.WebAPI.csproj", "{B79572F8-CCB6-49DA-8633-38F14F424B01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +15,6 @@ Global
 		{B79572F8-CCB6-49DA-8633-38F14F424B01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B79572F8-CCB6-49DA-8633-38F14F424B01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B79572F8-CCB6-49DA-8633-38F14F424B01}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2ED75092-ADD4-4517-B071-9946E1E27338}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2ED75092-ADD4-4517-B071-9946E1E27338}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2ED75092-ADD4-4517-B071-9946E1E27338}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2ED75092-ADD4-4517-B071-9946E1E27338}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
