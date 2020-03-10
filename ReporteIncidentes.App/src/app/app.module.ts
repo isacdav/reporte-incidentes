@@ -7,6 +7,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { InicioComponent } from './inicio/inicio.component';
 import { IncidenciasComponent } from './incidencias/incidencias.component';
 import { NuevaComponent } from './incidencias/nueva/nueva.component';
+import { CuentaComponent } from './cuenta/cuenta.component';
+import { RegistrarComponent } from './cuenta/registrar/registrar.component';
+import { CuentaModule } from './cuenta/cuenta.module';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: InicioComponent },
@@ -22,11 +25,8 @@ const routes: Routes = [
     IncidenciasComponent,
     NuevaComponent
   ],
-  imports: [
-    RouterModule.forRoot(routes),
-    BrowserModule,
-  ],
+  imports: [RouterModule.forRoot(routes), BrowserModule, CuentaModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
