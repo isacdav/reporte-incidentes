@@ -1,0 +1,117 @@
+<br />
+<h5>Ingrese sus datos para el registro</h5>
+<hr />
+<br />
+<form action="">
+  <div class="row">
+    <div class="col-4">
+      <label id="lblCedula">Cédula</label>
+      <input
+        class="form-control"
+        type="number"
+        id="txtCedula"
+        placeholder="1-2345-6789"
+      />
+    </div>
+    <div class="col-4">
+      <label id="lblNombre">Nombre</label>
+      <input
+        class="form-control"
+        type="text"
+        id="txtNombre"
+        placeholder="Nombre"
+      />
+    </div>
+    <div class="col-4">
+      <label id="lblApellido">Apellidos</label>
+      <input
+        class="form-control"
+        type="text"
+        id="txtApellidos"
+        placeholder="Apellidos"
+      />
+    </div>
+  </div>
+  <br />
+  <hr />
+  <br />
+  <div class="row">
+    <div class="col-4">
+      <label id="lblCorreo">Correo Electrónico</label>
+      <input
+        class="form-control"
+        type="email"
+        id="txtCorreo"
+        placeholder="nombre@correo.com"
+      />
+    </div>
+    <div class="col-4">
+      <label id="lblContra">Contraseña</label>
+      <input
+        class="form-control"
+        type="text"
+        id="txtContra"
+        placeholder="*********"
+      />
+    </div>
+    <div class="col-4">
+      <label id="lblTel">Teléfono de Contacto</label>
+      <input
+        class="form-control"
+        type="text"
+        id="txtTel"
+        placeholder="8765-4321"
+      />
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-4">
+      <label id="lblConfirmacionCorreo">Confirme el Correo</label>
+      <input
+        class="form-control"
+        type="email"
+        id="txtlConfirmacionCorreo"
+        placeholder="nombre@correo.com"
+      />
+    </div>
+  </div>
+  <br />
+  <hr />
+  <br />
+  <div class="row">
+    <div class="col-4">
+      <label id="lblProvincia">Provincia de Residencia</label>
+      <select class="form-control">
+        <option>Seleccionar...</option>
+        <option>San José</option>
+        <option>Alajuela</option>
+        <option>Cartago</option>
+        <option>Heredia</option>
+        <option>Guanacaste</option>
+        <option>Puntarenas</option>
+        <option>Limón</option>
+      </select>
+    </div>
+    <div class="col-8">
+      <label>Dirección de Residencia</label>
+      <div class="form-group">
+        <textarea
+          id="txtDireccion"
+          col-4s="100"
+          rows="5"
+          placeholder="Dirección exacta"
+          class="form-control"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <br />
+  <hr />
+  <br />
+  <input type="submit" class="btn btn-dark" value="Registrarme" />
+  <br />
+  <label class="small text-secondary">
+    *Al registrase acepta los términos y condiciones
+  </label>
+</form>

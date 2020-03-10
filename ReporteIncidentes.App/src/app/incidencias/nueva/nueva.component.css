@@ -1,0 +1,8 @@
+.imgagenes {
+  width: 100px;
+  height: 100px;
+}
+
+.custom-file-input ~ .custom-file-label::after {
+  content: "Elegir";
+}

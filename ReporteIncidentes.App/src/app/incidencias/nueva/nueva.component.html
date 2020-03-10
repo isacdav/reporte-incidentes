@@ -1,0 +1,179 @@
+<div>
+  <br />
+  <h5>Datos del Usuario</h5>
+  <hr />
+  <div class="form-group">
+    <!-- Mejor que salgan los datos del usuario reistrado -->
+    <div class="row">
+      <div class="col-4">
+        <label id="lblCedula">Cédula</label>
+        <input
+          class="form-control"
+          type="text"
+          id="txtCedula"
+          placeholder="1-2345-6789"
+          readonly
+        />
+      </div>
+      <div class="col-4">
+        <label id="lblNombre">Nombre</label>
+        <input
+          class="form-control"
+          type="text"
+          id="txtNombre"
+          placeholder="Nombre"
+          readonly
+        />
+      </div>
+      <div class="col-4">
+        <label id="lblApellido">Apellidos</label>
+        <input
+          class="form-control"
+          type="text"
+          id="txtApellidos"
+          placeholder="Apellidos"
+          readonly
+        />
+      </div>
+    </div>
+  </div>
+  <br />
+  <h5>Ubicación de la Incidencia</h5>
+  <hr />
+  <div class="form-group">
+    <div class="row">
+      <div class="col-8">
+        <div id="mapid">
+          <img
+            src="https://www.touropia.com/gfx/b/2013/11/costa_rica_map.jpg"
+            alt=""
+            width="500px"
+          />
+        </div>
+      </div>
+      <div class="col-4">
+        <label id="lblProvincia">Provincia</label>
+        <select class="form-control">
+          <option>Seleccionar...</option>
+          <option>San José</option>
+          <option>Alajuela</option>
+          <option>Cartago</option>
+          <option>Heredia</option>
+          <option>Guanacaste</option>
+          <option>Puntarenas</option>
+          <option>Limón</option>
+        </select>
+        <br />
+        <label id="lblCanton">Cantón</label>
+        <select class="form-control">
+          <option>Seleccionar...</option>
+          <option>San José</option>
+          <option>Escazú</option>
+          <option>Desamparados</option>
+          <option>Puriscal</option>
+        </select>
+        <br />
+        <label id="lblDistrito">Distrito</label>
+        <select class="form-control">
+          <option>Seleccionar...</option>
+          <option>Carmen</option>
+          <option>Merced</option>
+          <option>Acosta</option>
+          <option>Hospital</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <br />
+  <h5>Datos del la incidencia</h5>
+  <hr />
+  <div class="row">
+    <div class="col-6">
+      <label id="lblCategoria">Categoría</label>
+      <select class="form-control">
+        <option>Seleccionar...</option>
+        <option>Puente</option>
+        <option>Carretera</option>
+        <option>Tubería dañada</option>
+        <option>Sin electricidad</option>
+        <option>Poste caído</option>
+        <option>Acera en mal estado</option>
+        <option>Derrumbe</option>
+        <option>Otro</option>
+      </select>
+    </div>
+    <div class="col-6">
+      <label id="lblEmpresa">Empresa Responsable</label>
+      <select class="form-control">
+        <option>Seleccionar...</option>
+        <option>Municipalidad</option>
+        <option>MOPT</option>
+        <option>Conavi</option>
+        <option>AyA</option>
+        <option>ICE</option>
+        <option>RACSA</option>
+        <option>Otro</option>
+      </select>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-6">
+      <label>Dirección Exacta</label>
+      <div class="form-group">
+        <textarea
+          id="txtDireccion"
+          col-4s="100"
+          rows="5"
+          placeholder="Dirección exacta"
+          class="form-control"
+        ></textarea>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+        <div>
+          <label>Detalle del incidente</label>
+          <div>
+            <textarea
+              id="txtDetalle"
+              col-4s="100"
+              rows="5"
+              placeholder="Por favor escriba los detalles del incidente"
+              class="form-control"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <h5>Fotografías</h5>
+  <hr />
+  <div class="form-group">
+    <div class="imagenes">
+      <img height="150" width="150" src="~/img/22887717Master.jpg" />
+      <img height="150" width="150" src="~/img/5a0e52c2ad75c.jpeg" />
+      <img height="150" width="150" src="~/img/puente4.jpg" />
+      <img height="150" width="150" src="~/img/psoe-pide-6.jpg" />
+    </div>
+    <br />
+    <div class="input-group mb-3">
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" />
+        <label class="custom-file-label" accept="image/png, image/jpeg">
+          Seleccionar Imágenes
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <hr />
+    <button class="btn btn-dark">Registrar Incidencia</button>
+    <hr />
+  </div>
+  <!--
+  <script src="~/js/Ubicacion.js" asp-append-version="true"></script>
+  -->
+</div>
