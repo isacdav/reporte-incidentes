@@ -43,12 +43,10 @@
   <div class="form-group">
     <div class="row">
       <div class="col-8">
-        <div id="mapid">
-          <img
-            src="https://www.touropia.com/gfx/b/2013/11/costa_rica_map.jpg"
-            alt=""
-            width="500px"
-          />
+        <div id="map">
+          <agm-map [latitude]="lat" [longitude]="lng" [zoom]=15>
+            <agm-marker [latitude]="lat" [longitude]="lng"> </agm-marker>
+          </agm-map>
         </div>
       </div>
       <div class="col-4">

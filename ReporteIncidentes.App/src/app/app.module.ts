@@ -7,9 +7,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { InicioComponent } from './inicio/inicio.component';
 import { IncidenciasComponent } from './incidencias/incidencias.component';
 import { NuevaComponent } from './incidencias/nueva/nueva.component';
-import { CuentaComponent } from './cuenta/cuenta.component';
-import { RegistrarComponent } from './cuenta/registrar/registrar.component';
 import { CuentaModule } from './cuenta/cuenta.module';
+import { API_KEY } from './common/secret/API_KEY';
+
+import { AgmCoreModule } from '@agm/core';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: InicioComponent },
@@ -25,7 +26,14 @@ const routes: Routes = [
     IncidenciasComponent,
     NuevaComponent
   ],
-  imports: [RouterModule.forRoot(routes), BrowserModule, CuentaModule],
+  imports: [
+    RouterModule.forRoot(routes),
+    BrowserModule,
+    CuentaModule,
+    AgmCoreModule.forRoot({
+      apiKey: API_KEY.google_maps()
+    })
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

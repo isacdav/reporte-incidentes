@@ -6,3 +6,8 @@
 .custom-file-input ~ .custom-file-label::after {
   content: "Elegir";
 }
+
+agm-map {
+  height: 400px !important;
+  width: 100%;
+}
