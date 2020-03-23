@@ -2,7 +2,7 @@
 <h5>Ingrese sus datos para el registro</h5>
 <hr />
 <br />
-<form action="">
+<form [formGroup]="registroForm" (ngSubmit)="guardar()">
   <div class="row">
     <div class="col-4">
       <label id="lblCedula">Cédula</label>
@@ -11,6 +11,7 @@
         type="number"
         id="txtCedula"
         placeholder="1-2345-6789"
+        formControlName="cedula"
       />
     </div>
     <div class="col-4">
@@ -20,6 +21,7 @@
         type="text"
         id="txtNombre"
         placeholder="Nombre"
+        formControlName="nombre"
       />
     </div>
     <div class="col-4">
@@ -109,7 +111,7 @@
   <br />
   <hr />
   <br />
-  <input type="submit" class="btn btn-dark" value="Registrarme" />
+  <input type="submit" class="btn btn-dark" value="Registrarme" [disabled]="!registroForm.valid" />
   <br />
   <label class="small text-secondary">
     *Al registrase acepta los términos y condiciones

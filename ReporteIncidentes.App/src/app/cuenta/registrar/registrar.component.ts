@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registrar',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrarComponent implements OnInit {
 
-  constructor() { }
+  registroForm = this.fb.group({
+    cedula: ['', Validators.required],
+    nombre: [''],
+  });
+
+  constructor(private fb: FormBuilder) {
+  }
 
   ngOnInit() {
+  }
+
+  guardar(){
   }
 
 }

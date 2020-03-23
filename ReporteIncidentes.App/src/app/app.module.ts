@@ -11,6 +11,7 @@ import { CuentaModule } from './cuenta/cuenta.module';
 import { API_KEY } from './common/secret/API_KEY';
 
 import { AgmCoreModule } from '@agm/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: InicioComponent },
@@ -32,7 +33,9 @@ const routes: Routes = [
     CuentaModule,
     AgmCoreModule.forRoot({
       apiKey: API_KEY.google_maps()
-    })
+    }),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
