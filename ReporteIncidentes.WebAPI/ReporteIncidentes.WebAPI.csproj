@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ReporteIncidentes.Entities\ReporteIncidentes.Entities.csproj" />
+    <ProjectReference Include="..\ReportesIncidentes.BL\ReportesIncidentes.BL.csproj" />
   </ItemGroup>
 
 
