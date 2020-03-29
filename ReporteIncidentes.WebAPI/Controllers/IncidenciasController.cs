@@ -48,7 +48,7 @@ namespace ReporteIncidentes.WebAPI.Controllers
         /// </summary>
         /// <param name="incidencias"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [Route("[action]")]
         public Respuesta<List<Incidencias>> ConsultarIncidenciasUsuario(int idUsuario)
         {
