@@ -27,6 +27,8 @@ namespace ReportesIncidentes.BL
 			try
 			{
 				oUsuarios = new UsuariosDAL(_contexto);
+				usuario.Contrasena = CifradoHash256.HmacSHA512(usuario.Contrasena);
+				usuario.CodigoActivacion = Utilitarios.GenerarCodigoActivacion();
 				respuesta = oUsuarios.InsertarUsuario(usuario);
 			}
 			catch (Exception ex)
@@ -42,13 +44,14 @@ namespace ReportesIncidentes.BL
 		/// </summary>
 		/// <param name="usuario"></param>
 		/// <returns></returns>
-		public Respuesta<DatosUsuario> LogIn(DatosUsuario usuario)
+		public Respuesta<DatosUsuario> LogIn(string correo, string contrasena)
 		{
 			Respuesta<DatosUsuario> respuesta = new Respuesta<DatosUsuario>();
 			try
 			{
 				oUsuarios = new UsuariosDAL(_contexto);
-				respuesta = oUsuarios.LogIn(usuario);
+				contrasena = CifradoHash256.HmacSHA512(contrasena);
+				respuesta = oUsuarios.LogIn(correo, contrasena);
 			}
 			catch (Exception ex)
 			{
@@ -62,13 +65,13 @@ namespace ReportesIncidentes.BL
 		/// </summary>
 		/// <param name="usuario"></param>
 		/// <returns></returns>
-		public Respuesta<DatosUsuario> ActivarUsuario(DatosUsuario usuario)
+		public Respuesta<DatosUsuario> ActivarUsuario(string correoelectronico, int codigoActivacion)
 		{
 			Respuesta<DatosUsuario> respuesta = new Respuesta<DatosUsuario>();
 			try
 			{
 				oUsuarios = new UsuariosDAL(_contexto);
-				respuesta = oUsuarios.ActivarUsuario(usuario);
+				respuesta = oUsuarios.ActivarUsuario(correoelectronico, codigoActivacion);
 			}
 			catch (Exception ex)
 			{

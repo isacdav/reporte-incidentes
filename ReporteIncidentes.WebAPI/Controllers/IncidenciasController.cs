@@ -50,13 +50,13 @@ namespace ReporteIncidentes.WebAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
-        public Respuesta<List<Incidencias>> ConsultarIncidenciasUsuario(Incidencias incidencias)
+        public Respuesta<List<Incidencias>> ConsultarIncidenciasUsuario(int idUsuario)
         {
             Respuesta<List<Incidencias>> respuesta = new Respuesta<List<Incidencias>>();
             try
             {
                 oIncidencias = new IncidenciasBL(_contexto);
-                respuesta = oIncidencias.ConsultarIncidenciasUsuario(incidencias);
+                respuesta = oIncidencias.ConsultarIncidenciasUsuario(idUsuario);
             }
             catch (Exception ex)
             {
@@ -72,13 +72,13 @@ namespace ReporteIncidentes.WebAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
-        public Respuesta<Incidencias> CambiarEstadoIncidencia(Incidencias incidencias)
+        public Respuesta<Incidencias> CambiarEstadoIncidencia(int idIncidencia, string estado)
         {
             Respuesta<Incidencias> respuesta = new Respuesta<Incidencias>();
             try
             {
                 oIncidencias = new IncidenciasBL(_contexto);
-                respuesta = oIncidencias.CambiarEstadoIncidencia(incidencias);
+                respuesta = oIncidencias.CambiarEstadoIncidencia(idIncidencia,estado);
             }
             catch (Exception ex)
             {

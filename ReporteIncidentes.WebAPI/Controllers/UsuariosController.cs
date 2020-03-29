@@ -49,13 +49,13 @@ namespace ReporteIncidentes.WebAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
-        public Respuesta<DatosUsuario> LogIn(DatosUsuario usuario)
+        public Respuesta<DatosUsuario> LogIn(string correoElectronico,string contrasena)
         {
             Respuesta<DatosUsuario> respuesta = new Respuesta<DatosUsuario>();
             try
             {
                 oUsuarios = new UsuariosBL(_contexto);
-                respuesta = oUsuarios.LogIn(usuario);
+                respuesta = oUsuarios.LogIn(correoElectronico, contrasena);
             }
             catch (Exception ex)
             {
@@ -71,13 +71,13 @@ namespace ReporteIncidentes.WebAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
-        public Respuesta<DatosUsuario> ActivarUsuario(DatosUsuario usuario)
+        public Respuesta<DatosUsuario> ActivarUsuario(string correoelectronico,int codigoActivacion)
         {
             Respuesta<DatosUsuario> respuesta = new Respuesta<DatosUsuario>();
             try
             {
                 oUsuarios = new UsuariosBL(_contexto);
-                respuesta = oUsuarios.ActivarUsuario(usuario);
+                respuesta = oUsuarios.ActivarUsuario(correoelectronico,codigoActivacion);
             }
             catch (Exception ex)
             {

@@ -35,7 +35,7 @@ namespace ReporteIncidentes.DAL
 									@Contrasena, @CodigoActvacion ";
 					 _contexto.Database.ExecuteSqlCommand(SQL,
 						new SqlParameter("@Cedula", oUsuario.Cedula),
-						new SqlParameter("@Nombre", oUsuario.Provincia),
+						new SqlParameter("@Nombre", oUsuario.Nombre),
 						new SqlParameter("@Apellidos", oUsuario.Apellidos),
 						new SqlParameter("@Provincia", oUsuario.Provincia),
 						new SqlParameter("@Canton", oUsuario.Canton),
@@ -65,7 +65,7 @@ namespace ReporteIncidentes.DAL
 		/// </summary>
 		/// <param name="Usuario"></param>
 		/// <returns></returns>
-		public Respuesta<DatosUsuario> LogIn(DatosUsuario oUsuario)
+		public Respuesta<DatosUsuario> LogIn(string correo, string contrasena)
 		{
 			Respuesta<DatosUsuario> respuesta = new Respuesta<DatosUsuario>();
 			using (TransactionScope transaccion= new TransactionScope())
@@ -75,8 +75,8 @@ namespace ReporteIncidentes.DAL
 					string SQL = @"EXEC Pa_LogIn @Contrasena,  @CorreoElectronico";
 					respuesta.ObjetoRespuesta = _contexto.Set<Entities.DatosUsuario>().
 						FromSql(SQL,
-					   new SqlParameter("@CorreoElectronico", oUsuario.CorreoElectronico),
-					   new SqlParameter("@Contrasena", oUsuario.Contrasena)).FirstOrDefault();
+					   new SqlParameter("@CorreoElectronico", correo),
+					   new SqlParameter("@Contrasena", contrasena)).FirstOrDefault();
 				   _contexto.SaveChanges();
 					transaccion.Complete();
 					respuesta.HayError = false;					
@@ -95,34 +95,48 @@ namespace ReporteIncidentes.DAL
 		/// </summary>
 		/// <param name="oUsuario"></param>
 		/// <returns></returns>
-		public Respuesta<DatosUsuario> ActivarUsuario(DatosUsuario oUsuario)
+		public Respuesta<DatosUsuario> ActivarUsuario(string correoElectronico, int codigoActivacion)
 		{
 			Respuesta<DatosUsuario> respuesta = new Respuesta<DatosUsuario>();
-			using (TransactionScope transaccion = new TransactionScope())
+			TransactionScope transaccion= new TransactionScope();
+			try
 			{
-				try
+				var resultado=new EstadoUsuario();
+				using (transaccion)
 				{
 					string SQL = @"EXEC Pa_ActivarEstadousuario  @CorreoElectronico, @CodigoActvacion ";
-					var resultado= _contexto.Set<EstadoUsuario>().
+					resultado= _contexto.Set<EstadoUsuario>().
 						FromSql(SQL,
-					   new SqlParameter("@CorreoElectronico", oUsuario.CorreoElectronico),
-					   new SqlParameter("@CodigoActvacion", oUsuario.CodigoActivacion),
+					   new SqlParameter("@CorreoElectronico", correoElectronico),
+					   new SqlParameter("@CodigoActvacion", codigoActivacion),
 				   _contexto.SaveChanges()).FirstOrDefault();
 					transaccion.Complete();
 					respuesta.HayError = false;
-					if (resultado.Resultado.Equals("Usuario activado correctamente"))
-					{
-						respuesta.ObjetoRespuesta = oUsuario;
-						respuesta.ObjetoRespuesta.EstadoUsuario = "A";
-					}
-					respuesta.Mensaje = resultado.Resultado; 
+				
 				}
-				catch (Exception ex)
+
+				if (resultado.Resultado.Equals("Usuario activado correctamente"))
 				{
-					transaccion.Dispose();
-					respuesta.HayError = true;
-					respuesta.MensajeError = ex.Message;
+					using (transaccion = new TransactionScope())
+					{
+						string SQL2 = @"EXEC Pa_ConsultarUsuario  @CorreoElectronico ";
+						var resultado2 = _contexto.Set<DatosUsuario>().
+							FromSql(SQL2,
+						   new SqlParameter("@CorreoElectronico", correoElectronico),
+						   new SqlParameter("@CodigoActvacion", codigoActivacion),
+						_contexto.SaveChanges()).FirstOrDefault();
+						respuesta.ObjetoRespuesta = resultado2;
+						transaccion.Complete();
+						respuesta.HayError = false;
+					}
 				}
+				respuesta.Mensaje = resultado.Resultado;
+			}
+			catch (Exception ex)
+			{
+				transaccion.Dispose();
+				respuesta.HayError = true;
+				respuesta.MensajeError = ex.Message;
 			}
 			return respuesta;
 		}

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ReporteIncidentes.Entities;
+using ReportesIncidentes.BL;
 
 namespace ReporteIncidentes.WebAPI
 {
@@ -22,7 +23,7 @@ namespace ReporteIncidentes.WebAPI
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<Contexto>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+               options.UseSqlServer(CifradoAES.DescifrarAES(Configuration.GetConnectionString("DefaultConnection"))));
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>

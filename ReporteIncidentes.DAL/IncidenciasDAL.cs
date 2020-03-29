@@ -66,7 +66,7 @@ namespace ReporteIncidentes.DAL
 		/// </summary>
 		/// <param name="incidencias"></param>
 		/// <returns></returns>
-		public Respuesta<List<Incidencias>> ConsultarIncidenciasUsuario(Incidencias incidencias)
+		public Respuesta<List<Incidencias>> ConsultarIncidenciasUsuario(int idUsuario)
 		{
 			Respuesta<List<Incidencias>> respuesta = new Respuesta<List<Incidencias>>();
 			using (TransactionScope transaccion = new TransactionScope())
@@ -76,7 +76,7 @@ namespace ReporteIncidentes.DAL
 					string SQL = @"EXEC Pa_ConsultarIncidenciasUsuario @IdUsuario";
 					respuesta.ObjetoRespuesta = _contexto.Set<Entities.Incidencias>().
 						FromSql(SQL,
-					   new SqlParameter("@IdUsuario", incidencias.IdUsuario),
+					   new SqlParameter("@IdUsuario", idUsuario),
 					_contexto.SaveChanges()).ToList();
 					transaccion.Complete();
 					respuesta.HayError = false;
@@ -95,7 +95,7 @@ namespace ReporteIncidentes.DAL
 		/// </summary>
 		/// <param name="incidencias"></param>
 		/// <returns></returns>
-		public Respuesta<Incidencias> CambiarEstadoIncidencia(Incidencias incidencias)
+		public Respuesta<Incidencias> CambiarEstadoIncidencia(int idIncidencia, string estado)
 		{
 			Respuesta<Incidencias> respuesta = new Respuesta<Incidencias>();
 			using (TransactionScope transaccion = new TransactionScope())
@@ -105,8 +105,8 @@ namespace ReporteIncidentes.DAL
 					string SQL = @"EXEC Pa_CambiarEstadoIncidencia  @IdIncidencia, @EstadoIncidencia";
 					respuesta.ObjetoRespuesta = _contexto.Set<Incidencias>().
 						FromSql(SQL,
-					   new SqlParameter("@IdIncidencia", incidencias.IdIncidencia),
-					   new SqlParameter("@EstadoIncidencia", incidencias.Estado),
+					   new SqlParameter("@IdIncidencia", idIncidencia),
+					   new SqlParameter("@EstadoIncidencia", estado),
 				   _contexto.SaveChanges()).FirstOrDefault();
 					transaccion.Complete();
 					respuesta.HayError = false;					
