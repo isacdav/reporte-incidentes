@@ -32,8 +32,8 @@ namespace ReporteIncidentes.DAL
 				try
 				{
 					string SQL = @"EXEC Pa_InsertarIncidencia @IdUsuario,@Categoria,@Empresa,@Provincia,
-									@Canton,@Distrito,@DireccionExacta,@Latitud,@Longitud,@RutaImagenes,
-									@DetalleIncidencia";
+									@Canton,@Distrito,@DireccionExacta,@Latitud,@Longitud,@RutaImagen1,
+									@RutaImagen2,@RutaImagen3,@RutaImagen4,@DetalleIncidencia";
 					_contexto.Database.ExecuteSqlCommand(SQL,
 						new SqlParameter("@IdUsuario", incidencias.IdUsuario),
 						new SqlParameter("@Categoria", incidencias.Categoria),
@@ -44,7 +44,10 @@ namespace ReporteIncidentes.DAL
 						new SqlParameter("@DireccionExacta", incidencias.DireccionExacta),
 						new SqlParameter("@Latitud", incidencias.Latitud),
 						new SqlParameter("@Longitud", incidencias.Longitud),
-						new SqlParameter("@RutaImagenes", incidencias.RutaImagenes),
+						new SqlParameter("@RutaImagen1", incidencias.RutaImagen1),
+						new SqlParameter("@RutaImagen2", incidencias.RutaImagen2),
+						new SqlParameter("@RutaImagen3", incidencias.RutaImagen3),
+						new SqlParameter("@RutaImagen4", incidencias.RutaImagen4),
 						new SqlParameter("@DetalleIncidencia", incidencias.DetalleIncidencia),
 				   _contexto.SaveChanges());
 					transaccion.Complete();

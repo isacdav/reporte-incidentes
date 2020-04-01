@@ -61,7 +61,22 @@ namespace ReporteIncidentes.Entities
 		/// Ruta donde se almacenan las imagenes
 		/// </summary>
 		[DataMember]
-		public string RutaImagenes { get; set; }
+		public string RutaImagen1 { get; set; }
+		/// <summary>
+		/// Ruta donde se almacenan las imagenes
+		/// </summary>
+		[DataMember]
+		public string RutaImagen2 { get; set; }
+		/// <summary>
+		/// Ruta donde se almacenan las imagenes
+		/// </summary>
+		[DataMember]
+		public string RutaImagen3 { get; set; }
+		/// <summary>
+		/// Ruta donde se almacenan las imagenes
+		/// </summary>
+		[DataMember]
+		public string RutaImagen4 { get; set; }
 		/// <summary>
 		/// Detalle de la incidencia
 		/// </summary>

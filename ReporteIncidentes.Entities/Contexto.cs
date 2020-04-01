@@ -55,7 +55,10 @@ namespace ReporteIncidentes.Entities
                 entity.Property(e=>e.DireccionExacta).HasColumnName("DireccionExacta");
                 entity.Property(e=>e.Latitud).HasColumnName("Latitud");
                 entity.Property(e=>e.Longitud).HasColumnName("Longitud");
-                entity.Property(e=>e.RutaImagenes).HasColumnName("RutaImagenes");
+                entity.Property(e=>e.RutaImagen1).HasColumnName("RutaImagen1");
+                entity.Property(e=>e.RutaImagen2).HasColumnName("RutaImagen2");
+                entity.Property(e=>e.RutaImagen3).HasColumnName("RutaImagen3");
+                entity.Property(e=>e.RutaImagen4).HasColumnName("RutaImagen4");
                 entity.Property(e=>e.DetalleIncidencia).HasColumnName("DetalleIncidencia");
                 entity.Property(e=>e.Estado).HasColumnName("Estado");
             });
