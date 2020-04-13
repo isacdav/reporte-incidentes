@@ -1,6 +1,10 @@
-﻿using ReporteIncidentes.DAL;
+﻿using Newtonsoft.Json;
+using ReporteIncidentes.DAL;
 using ReporteIncidentes.Entities;
 using System;
+using System.Threading.Tasks;
+using Verifalia.Api;
+using Verifalia.Api.EmailValidations;
 
 namespace ReportesIncidentes.BL
 {
@@ -81,6 +85,34 @@ namespace ReportesIncidentes.BL
 			{
 				respuesta.HayError = true;
 				respuesta.MensajeError = ex.Message;
+			}
+			return respuesta;
+		}
+		/// <summary>
+		/// Método utilizado para validar la dirección del email
+		/// </summary>
+		/// <param name="email"></param>
+		/// <returns></returns>
+		public async Task<Respuesta<string>> VerificarEmail(string email)
+		{
+			Respuesta<string> respuesta = new Respuesta<string>();
+			try
+			{
+				var verifalia = new VerifaliaRestClient(CifradoAES.DescifrarAES(Configuracion.Leer("EmailApp")),
+					CifradoAES.DescifrarAES(Configuracion.Leer("Contrasena")));
+				var validation = await verifalia
+										.EmailValidations
+										.SubmitAsync(email,waitingStrategy: new WaitingStrategy(true));
+				respuesta.HayError = false;
+				//respuesta.IdError = validation.Entries[0].Status;
+				respuesta.ObjetoRespuesta = JsonConvert.SerializeObject(validation.Entries[0]); 
+				respuesta.Mensaje = validation.Entries[0].Status.ToString();
+			}
+			catch (Exception ex)
+			{
+				respuesta.HayError = true;
+				respuesta.MensajeError = ex.Message;
+				respuesta.ObjetoRespuesta = string.Empty;
 			}
 			return respuesta;
 		}
