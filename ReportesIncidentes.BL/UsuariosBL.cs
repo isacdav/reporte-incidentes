@@ -30,6 +30,10 @@ namespace ReportesIncidentes.BL
 				usuario.Contrasena = CifradoHash256.HmacSHA512(usuario.Contrasena);
 				usuario.CodigoActivacion = Utilitarios.GenerarCodigoActivacion();
 				respuesta = oUsuarios.InsertarUsuario(usuario);
+				if (!respuesta.HayError && respuesta.ObjetoRespuesta)
+				{
+					Utilitarios.EnviarEmail(usuario.CorreoElectronico,usuario.Nombre,usuario.Apellidos,usuario.CodigoActivacion);
+				}
 			}
 			catch (Exception ex)
 			{
