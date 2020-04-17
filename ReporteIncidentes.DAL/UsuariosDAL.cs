@@ -31,15 +31,13 @@ namespace ReporteIncidentes.DAL
 				try
 				{
 					string SQL = @"EXEC Pa_InsertarUsurio @Cedula, @Nombre, @Apellidos, @Provincia,
-									@Canton, @Distrito, @Direccion, @CorreoElectronico, @Telefono,
+									@Direccion, @CorreoElectronico, @Telefono,
 									@Contrasena, @CodigoActvacion ";
 					 _contexto.Database.ExecuteSqlCommand(SQL,
 						new SqlParameter("@Cedula", oUsuario.Cedula),
 						new SqlParameter("@Nombre", oUsuario.Nombre),
 						new SqlParameter("@Apellidos", oUsuario.Apellidos),
 						new SqlParameter("@Provincia", oUsuario.Provincia),
-						new SqlParameter("@Canton", oUsuario.Canton),
-						new SqlParameter("@Distrito", oUsuario.Distrito),
 						new SqlParameter("@Direccion", oUsuario.Direccion),
 						new SqlParameter("@CorreoElectronico", oUsuario.CorreoElectronico),
 						new SqlParameter("@Telefono", oUsuario.Telefono),

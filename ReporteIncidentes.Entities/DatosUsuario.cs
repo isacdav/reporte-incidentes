@@ -31,17 +31,7 @@ namespace ReporteIncidentes.Entities
 		/// Provincia en donde vive el usuario
 		/// </summary>
 		[DataMember]
-		public string Provincia { get; set; }
-		/// <summary>
-		/// Canton en donde vive el usuario
-		/// </summary>
-		[DataMember]
-		public string Canton { get; set; }
-		/// <summary>
-		/// Distrito en donde vive el usuario
-		/// </summary>
-		[DataMember]
-		public string Distrito { get; set; }
+		public string Provincia { get; set; }		
 		/// <summary>
 		/// Direccion exacta de la residencia del usuario
 		/// </summary>
