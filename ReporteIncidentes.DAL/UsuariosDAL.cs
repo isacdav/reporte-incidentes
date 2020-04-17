@@ -26,35 +26,58 @@ namespace ReporteIncidentes.DAL
 		public Respuesta<bool> InsertarUsuario(DatosUsuario oUsuario)
 		{
 			Respuesta<bool> respuesta = new Respuesta<bool>();
-			using (TransactionScope transaccion = new TransactionScope())
+			TransactionScope transaccion = new TransactionScope();
+			DatosUsuario usuario = new DatosUsuario();
+			try
 			{
-				try
+				using (transaccion)
 				{
-					string SQL = @"EXEC Pa_InsertarUsurio @Cedula, @Nombre, @Apellidos, @Provincia,
-									@Direccion, @CorreoElectronico, @Telefono,
-									@Contrasena, @CodigoActvacion ";
-					 _contexto.Database.ExecuteSqlCommand(SQL,
-						new SqlParameter("@Cedula", oUsuario.Cedula),
-						new SqlParameter("@Nombre", oUsuario.Nombre),
-						new SqlParameter("@Apellidos", oUsuario.Apellidos),
-						new SqlParameter("@Provincia", oUsuario.Provincia),
-						new SqlParameter("@Direccion", oUsuario.Direccion),
-						new SqlParameter("@CorreoElectronico", oUsuario.CorreoElectronico),
-						new SqlParameter("@Telefono", oUsuario.Telefono),
-						new SqlParameter("@Contrasena", oUsuario.Contrasena),
-						new SqlParameter("@CodigoActvacion", oUsuario.CodigoActivacion),
-					_contexto.SaveChanges());
+					string SQL2 = @"EXEC Pa_ConsultarUsuario  @CorreoElectronico ";
+					usuario = _contexto.Set<DatosUsuario>().
+						FromSql(SQL2,
+					   new SqlParameter("@CorreoElectronico", oUsuario.CorreoElectronico),
+					_contexto.SaveChanges()).FirstOrDefault();
 					transaccion.Complete();
-					respuesta.HayError = false;
-					respuesta.ObjetoRespuesta = true;
+					if (usuario != null)
+					{
+						respuesta.ObjetoRespuesta = false;
+						respuesta.HayError = false;
+						respuesta.Mensaje = "Ya existe un usuario registrado con esa dirección de email";
+					}					
 				}
-				catch (Exception ex)
+
+				if (usuario==null)
 				{
-					transaccion.Dispose();
-					respuesta.HayError = true;
-					respuesta.MensajeError = ex.Message;
-					respuesta.ObjetoRespuesta = false;
+					using (transaccion= new TransactionScope())
+					{
+						string SQL = @"EXEC Pa_InsertarUsurio @Cedula, @Nombre, @Apellidos, @Provincia,
+								@Direccion, @CorreoElectronico, @Telefono,
+								@Contrasena, @CodigoActvacion ";
+						_contexto.Database.ExecuteSqlCommand(SQL,
+						   new SqlParameter("@Cedula", oUsuario.Cedula),
+						   new SqlParameter("@Nombre", oUsuario.Nombre),
+						   new SqlParameter("@Apellidos", oUsuario.Apellidos),
+						   new SqlParameter("@Provincia", oUsuario.Provincia),
+						   new SqlParameter("@Direccion", oUsuario.Direccion),
+						   new SqlParameter("@CorreoElectronico", oUsuario.CorreoElectronico),
+						   new SqlParameter("@Telefono", oUsuario.Telefono),
+						   new SqlParameter("@Contrasena", oUsuario.Contrasena),
+						   new SqlParameter("@CodigoActvacion", oUsuario.CodigoActivacion),
+					   _contexto.SaveChanges());
+						transaccion.Complete();
+						respuesta.HayError = false;
+						respuesta.ObjetoRespuesta = true;
+						respuesta.Mensaje = "¡Felicidades, su usuario se ha registrado correctamente!";
+					}
 				}
+				
+			}
+			catch (Exception ex)
+			{
+				transaccion.Dispose();
+				respuesta.HayError = true;
+				respuesta.MensajeError = ex.Message;
+				respuesta.ObjetoRespuesta = false;
 			}
 			return respuesta;
 		}
@@ -121,7 +144,6 @@ namespace ReporteIncidentes.DAL
 						var resultado2 = _contexto.Set<DatosUsuario>().
 							FromSql(SQL2,
 						   new SqlParameter("@CorreoElectronico", correoElectronico),
-						   new SqlParameter("@CodigoActvacion", codigoActivacion),
 						_contexto.SaveChanges()).FirstOrDefault();
 						respuesta.ObjetoRespuesta = resultado2;
 						transaccion.Complete();
