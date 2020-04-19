@@ -8,11 +8,29 @@
       <label id="lblCedula">Cédula</label>
       <input
         class="form-control"
-        type="number"
+        type="text"
         id="txtCedula"
-        placeholder="1-2345-6789"
+        placeholder="123456789"
         formControlName="cedula"
       />
+      <div *ngIf="registroForm.controls.cedula.touched">
+        <div
+          *ngIf="registroForm.controls.cedula.errors?.required"
+          class="form-text text-danger small"
+        >
+          La cédula es requerida
+        </div>
+        <div
+          *ngIf="
+            registroForm.controls.cedula.errors?.minlength ||
+            registroForm.controls.cedula.errors?.maxlength ||
+            registroForm.controls.cedula.errors?.pattern
+          "
+          class="form-text text-danger small"
+        >
+          La cédula ingresada no es válida
+        </div>
+      </div>
     </div>
     <div class="col-4">
       <label id="lblNombre">Nombre</label>
@@ -23,6 +41,14 @@
         placeholder="Nombre"
         formControlName="nombre"
       />
+      <div *ngIf="registroForm.controls.nombre.touched">
+        <div
+          *ngIf="registroForm.controls.nombre.errors?.required"
+          class="form-text text-danger small"
+        >
+          El nombre es requerido
+        </div>
+      </div>
     </div>
     <div class="col-4">
       <label id="lblApellido">Apellidos</label>
@@ -31,7 +57,16 @@
         type="text"
         id="txtApellidos"
         placeholder="Apellidos"
+        formControlName="apellidos"
       />
+      <div *ngIf="registroForm.controls.apellidos.touched">
+        <div
+          *ngIf="registroForm.controls.apellidos.errors?.required"
+          class="form-text text-danger small"
+        >
+          Los apellidos son requeridos
+        </div>
+      </div>
     </div>
   </div>
   <br />
@@ -45,16 +80,47 @@
         type="email"
         id="txtCorreo"
         placeholder="nombre@correo.com"
+        formControlName="correoElectronico"
       />
+      <div *ngIf="registroForm.controls.correoElectronico.touched">
+        <div
+          *ngIf="registroForm.controls.correoElectronico.errors?.required"
+          class="form-text text-danger small"
+        >
+          El correo electrónico es requerido
+        </div>
+        <div
+          *ngIf="registroForm.controls.correoElectronico.errors?.email"
+          class="form-text text-danger small"
+        >
+          El correo ingresado no es válido
+        </div>
+      </div>
     </div>
     <div class="col-4">
       <label id="lblContra">Contraseña</label>
       <input
         class="form-control"
-        type="text"
+        type="password"
         id="txtContra"
-        placeholder="*********"
+        placeholder="*******"
+        formControlName="contrasena"
       />
+      <div *ngIf="registroForm.controls.contrasena.touched">
+        <div
+          *ngIf="registroForm.controls.contrasena.errors?.required"
+          class="form-text text-danger small"
+        >
+          La contraseña es requerida
+        </div>
+        <div
+          *ngIf="registroForm.controls.contrasena.errors?.pattern"
+          class="form-text text-danger small"
+        >
+          La contraseña debe tener al menos un número, una minúscula, una
+          mayúscula y al menos 6 dígitos
+        </div>
+      </div>
     </div>
     <div class="col-4">
       <label id="lblTel">Teléfono de Contacto</label>
@@ -62,20 +128,27 @@
         class="form-control"
         type="text"
         id="txtTel"
-        placeholder="8765-4321"
+        placeholder="87654321"
+        formControlName="telefono"
       />
-    </div>
-  </div>
-  <br />
-  <div class="row">
-    <div class="col-4">
-      <label id="lblConfirmacionCorreo">Confirme el Correo</label>
-      <input
-        class="form-control"
-        type="email"
-        id="txtlConfirmacionCorreo"
-        placeholder="nombre@correo.com"
-      />
+      <div *ngIf="registroForm.controls.telefono.touched">
+        <div
+          *ngIf="registroForm.controls.telefono.errors?.required"
+          class="form-text text-danger small"
+        >
+          El télefono es requerido
+        </div>
+        <div
+          *ngIf="
+            registroForm.controls.telefono.errors?.minlength ||
+            registroForm.controls.telefono.errors?.maxlength ||
+            registroForm.controls.telefono.errors?.pattern
+          "
+          class="form-text text-danger small"
+        >
+          El télefono ingresado no es válido
+        </div>
+      </div>
     </div>
   </div>
   <br />
@@ -84,16 +157,23 @@
   <div class="row">
     <div class="col-4">
       <label id="lblProvincia">Provincia de Residencia</label>
-      <select class="form-control">
-        <option>Seleccionar...</option>
-        <option>San José</option>
-        <option>Alajuela</option>
-        <option>Cartago</option>
-        <option>Heredia</option>
-        <option>Guanacaste</option>
-        <option>Puntarenas</option>
-        <option>Limón</option>
+      <select class="form-control" formControlName="provincia">
+        <option value="1">San José</option>
+        <option value="2">Alajuela</option>
+        <option value="3">Cartago</option>
+        <option value="4">Heredia</option>
+        <option value="5">Guanacaste</option>
+        <option value="6">Puntarenas</option>
+        <option value="7">Limón</option>
       </select>
+      <div *ngIf="registroForm.controls.provincia.touched">
+        <div
+          *ngIf="registroForm.controls.provincia.errors?.required"
+          class="form-text text-danger small"
+        >
+          Seleccione una provincia
+        </div>
+      </div>
     </div>
     <div class="col-8">
       <label>Dirección de Residencia</label>
@@ -104,16 +184,33 @@
           rows="5"
           placeholder="Dirección exacta"
           class="form-control"
+          formControlName="direccion"
         ></textarea>
+      </div>
+      <div *ngIf="registroForm.controls.direccion.touched">
+        <div
+          *ngIf="registroForm.controls.direccion.errors?.required"
+          class="form-text text-danger small"
+        >
+          Ingrese la dirección
+        </div>
       </div>
     </div>
   </div>
   <br />
   <hr />
+  <div class="alert alert-danger" *ngIf="errores">
+    {{mensajeError}}
+  </div>
   <br />
-  <input type="submit" class="btn btn-dark" value="Registrarme" [disabled]="!registroForm.valid" />
+  <input
+    type="submit"
+    class="btn btn-dark"
+    value="Registrarme"
+    [disabled]="!registroForm.valid"
+  />
   <br />
   <label class="small text-secondary">
-    *Al registrase acepta los términos y condiciones
+    *Al registrase acepta los <u>términos y condiciones</u>
   </label>
 </form>
