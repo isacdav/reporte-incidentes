@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './common/header/header.component';
@@ -11,6 +13,7 @@ import { CuentaModule } from './cuenta/cuenta.module';
 import { API_KEY } from './common/secret/API_KEY';
 
 import { AgmCoreModule } from '@agm/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: InicioComponent },
@@ -29,10 +32,13 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
+    HttpClientModule,
     CuentaModule,
     AgmCoreModule.forRoot({
       apiKey: API_KEY.google_maps()
-    })
+    }),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
