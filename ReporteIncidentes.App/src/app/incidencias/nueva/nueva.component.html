@@ -13,33 +13,21 @@
       </div>
       <div class="col-4">
         <label id="lblProvincia">Provincia</label>
-        <select class="form-control">
-          <option>Seleccionar...</option>
-          <option>San José</option>
-          <option>Alajuela</option>
-          <option>Cartago</option>
-          <option>Heredia</option>
-          <option>Guanacaste</option>
-          <option>Puntarenas</option>
-          <option>Limón</option>
-        </select>
+        <select  class="form-control" (change)='onOptionsSelectedProvincia($event)' id="dpnProvincia">
+          <option disabled selected value="0">Seleccionar...</option>  
+          <option *ngFor="let provincia of provincias" [value]="provincia.id">{{provincia.descripcion}}</option>
+       </select>
         <br />
         <label id="lblCanton">Cantón</label>
-        <select class="form-control">
-          <option>Seleccionar...</option>
-          <option>San José</option>
-          <option>Escazú</option>
-          <option>Desamparados</option>
-          <option>Puriscal</option>
+        <select class="form-control" id="dpnCantones" (change)='onOptionsSelectedCantones($event)'>
+          <option disabled selected value="0">Seleccionar...</option>  
+          <option *ngFor="let canton of cantones" [value]="canton.id">{{canton.descripcion}}</option>
         </select>
         <br />
         <label id="lblDistrito">Distrito</label>
-        <select class="form-control">
-          <option>Seleccionar...</option>
-          <option>Carmen</option>
-          <option>Merced</option>
-          <option>Acosta</option>
-          <option>Hospital</option>
+        <select class="form-control" id="dpnDistritos">
+          <option disabled selected value="0">Seleccionar...</option>  
+          <option *ngFor="let distrito of distritos" [value]="distrito.id">{{distrito.descripcion}}</option>
         </select>
       </div>
     </div>
