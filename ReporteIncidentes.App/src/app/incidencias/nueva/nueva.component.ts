@@ -74,7 +74,13 @@ export class NuevaComponent implements OnInit {
     this.getDistritos(this.idProvincia,event.target.value);
   }
 
-  ngOnInit() {
+   InicializarCombos(){
     this.getProvincias();
+    this.getCantones(1);
+    this.getDistritos(1,1);
+   }
+
+  ngOnInit() {
+    this.InicializarCombos();
   }
 }
