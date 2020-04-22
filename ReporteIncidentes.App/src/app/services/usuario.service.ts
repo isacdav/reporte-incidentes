@@ -22,7 +22,7 @@ export class UsuarioService {
 
   public registrar(userData: any): Observable<any> {
     return this.http.post(
-      'https://reporteincidenciasapi.azurewebsites.net/api/Usuarios/InsertarUsuario',
+      'https://reporteincidencias.azurewebsites.net//api/Usuarios/InsertarUsuario',
       userData
     );
   }
@@ -30,7 +30,7 @@ export class UsuarioService {
   public iniciarSesion(data: any): Observable<any> {
     return this.http
       .post(
-        'https://reporteincidenciasapi.azurewebsites.net/api/Usuarios/LogIn?correoElectronico=' +
+        'https://reporteincidencias.azurewebsites.net//api/Usuarios/LogIn?correoElectronico=' +
           data.correoElectronico +
           '&contrasena=' +
           data.contrasena,
