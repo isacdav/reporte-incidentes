@@ -4,50 +4,51 @@
     <div class="card">
       <div class="card-header">Inicio de Sesión</div>
       <div class="card-body">
-        <form action="" method="">
+        <form [formGroup]="inicioForm" (ngSubmit)="loguear()">
           <div class="form-group row">
-            <label
-              for="email_address"
-              class="col-4 col-form-label text-md-right"
-            >
-              Cédula
+            <label for="email_address" class="col-4 col-form-label text-md-right">
+              Correo
             </label>
             <div class="col-6">
-              <input
-                type="number"
-                id="txtCedula"
-                class="form-control"
-                required
-                autofocus
-              />
+              <input type="text" id="txtCorreo" class="form-control" formControlName="correoElectronico" required />
+              <div *ngIf="inicioForm.controls.correoElectronico.touched">
+                <div *ngIf="inicioForm.controls.correoElectronico.errors?.required" class="form-text text-danger small">
+                  Ingrese su correo
+                </div>
+                <div *ngIf="inicioForm.controls.correoElectronico.errors?.email" class="form-text text-danger small">
+                  El correo no es válido
+                </div>
+              </div>
             </div>
           </div>
-
           <div class="form-group row">
-            <label
-              for="txtContra"
-              class="col-md-4 col-form-label text-md-right"
-            >
+            <label for="txtContra" class="col-md-4 col-form-label text-md-right">
               Contraseña
             </label>
             <div class="col-6">
-              <input
-                type="password"
-                id="txtContra"
-                class="form-control"
-                required
-              />
+              <input type="password" id="txtContra" class="form-control" formControlName="contrasena" required />
+              <div *ngIf="inicioForm.controls.contrasena.touched">
+                <div *ngIf="inicioForm.controls.contrasena.errors?.required" class="form-text text-danger small">
+                  Ingrese su contraseña
+                </div>
+              </div>
             </div>
           </div>
-          <br />
+          <br>
           <div class="col-6 offset-md-4">
-            <input type="submit" class="btn btn-dark" value="Iniciar Sesión" />
+            <input type="submit" class="btn btn-dark" value="Iniciar Sesión" [disabled]="!inicioForm.valid" />
             <a class="btn btn-link btn-sm text-dark">
               ¿Olvidó su contraseña?
             </a>
           </div>
         </form>
       </div>
+    </div>
+    <div *ngIf="mensajeRegistrado" class="alert alert-success">
+      {{ mensajeRegistrado }}
+    </div>
+    <div class="alert alert-danger text-center" *ngIf="errores">
+      {{ mensajeError }}
     </div>
   </div>
 </div>
