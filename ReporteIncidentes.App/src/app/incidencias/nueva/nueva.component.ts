@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Router } from '@angular/router';
-import { IncidenciasService } from 'src/app/services/Incidencias.servic';
+import { IncidenciasService } from 'src/app/services/incidencias.service';
 
 @Component({
   selector: 'app-nueva',

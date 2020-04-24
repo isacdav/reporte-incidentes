@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Server } from '../common/secret/server';
 
 @Injectable({
   providedIn: 'root',
@@ -8,12 +9,28 @@ import { Observable } from 'rxjs';
 export class ReporteService {
   constructor(private http: HttpClient) {}
 
-  public getReporteId(id: string): Observable<any> {
-    return this.http.get('ruta' + 12 + 'parametro');
+  public getReportes(): Observable<any> {
+    return this.http.get(
+      Server.api_url() + '/Incidencias/ConsultarIncidenciasUsuario'
+    );
   }
 
-  public register(userData: any): Observable<any> {
-    return this.http.post('/api/v1/users/register', userData);
+  public getReportesUsuario(id: number): Observable<any> {
+    return this.http.get(
+      Server.api_url() +
+        '/Incidencias/ConsultarIncidenciasUsuario?idUsuario=' +
+        id
+    );
   }
 
+  public cambiarEstado(idInc: number, estado: string) {
+    return this.http.post(
+      Server.api_url() +
+        '/Incidencias/CambiarEstadoIncidencia?idIncidencia=' +
+        idInc +
+        '&estado=' +
+        estado,
+      null
+    );
+  }
 }

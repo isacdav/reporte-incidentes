@@ -1,0 +1,10 @@
+<br />
+<h5>Listado de Incidencias</h5>
+<hr />
+<br />
+
+<div class="row">
+    <div class='col-sm-4' *ngFor="let inc of incidencias">
+        <app-incidencia [incidenciaActual]="inc"></app-incidencia>
+    </div>
+</div>

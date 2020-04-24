@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import 'rxjs/Rx';
+import { Server } from '../common/secret/server';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,7 @@ export class UsuarioService {
 
   public registrar(userData: any): Observable<any> {
     return this.http.post(
-      'https://reporteincidenciasapi.azurewebsites.net/api/Usuarios/InsertarUsuario',
+      Server.api_url() + '/Usuarios/InsertarUsuario',
       userData
     );
   }
@@ -30,7 +31,8 @@ export class UsuarioService {
   public iniciarSesion(data: any): Observable<any> {
     return this.http
       .post(
-        'https://reporteincidenciasapi.azurewebsites.net/api/Usuarios/LogIn?correoElectronico=' +
+        Server.api_url() +
+          '/Usuarios/LogIn?correoElectronico=' +
           data.correoElectronico +
           '&contrasena=' +
           data.contrasena,
@@ -50,5 +52,9 @@ export class UsuarioService {
 
   public getNombre(): string {
     return localStorage.getItem('nombre');
+  }
+
+  public getIdUsuario(): any {
+    return localStorage.getItem('idUsuario');
   }
 }
