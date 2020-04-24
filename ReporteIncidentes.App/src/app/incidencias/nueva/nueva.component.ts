@@ -168,7 +168,10 @@ export class NuevaComponent implements OnInit {
         } else {
           this.exito = true;
           this.mensajeExito = 'Incidencia ingresada correctamente';     
-          this.LimpiarImagenes();     
+
+          
+          this.LimpiarImagenes();   
+          this.reloadForm();  
         }
       },
       (errorResp) => {
@@ -230,5 +233,14 @@ export class NuevaComponent implements OnInit {
     this.maximoImagenes=false;
     this.erroresCarga=false;
     this.exitoCarga=false;
+  }
+
+   delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
+
+  async reloadForm(){
+    await this.delay(2000);
+    window.location.reload();
   }
 }
