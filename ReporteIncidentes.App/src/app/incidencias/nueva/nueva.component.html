@@ -13,17 +13,19 @@
       </div>
       <div class="col-4">
         <label id="lblProvincia">Provincia</label>
-        <select  class="form-control" (change)='onOptionsSelectedProvincia($event)' id="dpnProvincia" formControlName="provincia">
+        <select class="form-control" (change)='onOptionsSelectedProvincia($event)' id="dpnProvincia"
+          formControlName="provincia">
           <option *ngFor="let provincia of provincias" [value]="provincia.id">{{provincia.descripcion}}</option>
-       </select>
-       <div *ngIf="registroForm.controls.provincia.touched">
-        <div *ngIf="registroForm.controls.provincia.errors?.required" class="form-text text-danger small">
-          Seleccione una provincia
+        </select>
+        <div *ngIf="registroForm.controls.provincia.touched">
+          <div *ngIf="registroForm.controls.provincia.errors?.required" class="form-text text-danger small">
+            Seleccione una provincia
+          </div>
         </div>
-      </div>
         <br />
         <label id="lblCanton">Cantón</label>
-        <select class="form-control" id="dpnCantones" (change)='onOptionsSelectedCantones($event)' formControlName="canton">
+        <select class="form-control" id="dpnCantones" (change)='onOptionsSelectedCantones($event)'
+          formControlName="canton">
           <option *ngFor="let canton of cantones" [value]="canton.id">{{canton.descripcion}}</option>
         </select>
         <div *ngIf="registroForm.controls.canton.touched">
@@ -33,7 +35,7 @@
         </div>
         <br />
         <label id="lblDistrito">Distrito</label>
-        <select class="form-control" id="dpnDistritos" formControlName="distrito">
+        <select class="form-control" id="dpnDistritos" formControlName="distrito" (change)="onDistritoSelected($event)">
           <option *ngFor="let distrito of distritos" [value]="distrito.id">{{distrito.descripcion}}</option>
         </select>
         <div *ngIf="registroForm.controls.distrito.touched">
@@ -89,8 +91,8 @@
     <div class="col-6">
       <label>Dirección Exacta</label>
       <div class="form-group">
-        <textarea id="txtDireccion" col-4s="100" rows="5" placeholder="Dirección exacta"
-          class="form-control" formControlName="direccionExacta"></textarea>
+        <textarea id="txtDireccion" col-4s="100" rows="5" placeholder="Dirección exacta" class="form-control"
+          formControlName="direccionExacta"></textarea>
       </div>
       <div *ngIf="registroForm.controls.direccionExacta.touched">
         <div *ngIf="registroForm.controls.direccionExacta.errors?.required" class="form-text text-danger small">
@@ -132,7 +134,7 @@
     <br />
     <div class="input-group mb-3">
       <div class="custom-file">
-        <input type="file" class="custom-file-input" (change)="processFile(imageInput)"/>
+        <input type="file" class="custom-file-input" (change)="processFile(imageInput)" />
         <label class="custom-file-label" accept="image/png, image/jpeg">
           Seleccionar Imágenes
         </label>
@@ -148,7 +150,7 @@
     </div>
     <br />
     <hr />
-    <input type="submit" class="btn btn-dark" value="Registrarme" [disabled]="!registroForm.valid" />
+    <input type="submit" class="btn btn-dark" value="Reportar Incidencia" [disabled]="!registroForm.valid" />
     <hr />
   </div>
 </form>

@@ -18,45 +18,39 @@ export class NuevaComponent implements OnInit {
   name = 'Mapa';
   lat: any;
   lng: any;
-  provincias=[];
-  cantones=[];
-  distritos=[];
-  idProvincia=0;
-  registroForm=this.fb.group({
-    idIncidencia:[],
-    idUsuario:[],
-    categoria:['', Validators.required],
-    empresa:['', Validators.required],
-    provincia:['', Validators.required],
-    canton:['', Validators.required],
-    distrito:['', Validators.required],
-    direccionExacta:[
-      '',
-      [
-        Validators.required,
-        Validators.maxLength(500),
-      ],
-    ],
+
+  provinciaSeleccionada: string;
+  cantonSeleccionado: string;
+  distritoSeleccionado: string;
+
+  provincias = [];
+  cantones = [];
+  distritos = [];
+  idProvincia = 0;
+  registroForm = this.fb.group({
+    idIncidencia: [],
+    idUsuario: [],
+    categoria: ['', Validators.required],
+    empresa: ['', Validators.required],
+    provincia: ['', Validators.required],
+    canton: ['', Validators.required],
+    distrito: ['', Validators.required],
+    direccionExacta: ['', [Validators.required, Validators.maxLength(500)]],
     latitud: [],
     longitud: [],
     rutaImagen1: [],
     rutaImagen2: [],
     rutaImagen3: [],
     rutaImagen4: [],
-    detalleIncidencia: [
-      '',
-      [
-        Validators.required,
-        Validators.maxLength(500),
-      ],
-    ],
-    estado: []
+    detalleIncidencia: ['', [Validators.required, Validators.maxLength(500)]],
+    estado: [],
   });
   constructor(
-      public usuarioSrv: UsuarioService, 
-      private router: Router,
-      private _incidenciasService:IncidenciasService,
-      private fb: FormBuilder,) {
+    public usuarioSrv: UsuarioService,
+    private router: Router,
+    private _incidenciasService: IncidenciasService,
+    private fb: FormBuilder
+  ) {
     if (this.usuarioSrv.estaLogueado()) {
       this.router.navigate(['/loguearse']);
     }
@@ -69,64 +63,78 @@ export class NuevaComponent implements OnInit {
     }
   }
 
-  async getProvincias(){
-    var resultados=await this._incidenciasService.provincias();
-    for(let index in resultados){
-      let provincia={
-        id:+index,
-        descripcion:resultados[index]
-      }
+  async getProvincias() {
+    var resultados = await this._incidenciasService.provincias();
+    for (let index in resultados) {
+      let provincia = {
+        id: +index,
+        descripcion: resultados[index],
+      };
       this.provincias.push(provincia);
-    }    
+    }
   }
 
-  async getCantones(idProvincia:any){
-    this.cantones=[];
-    var resultados= await this._incidenciasService.cantones(idProvincia);
-    for(let index in resultados){
-      let canton={
-        id:+index,
-        descripcion:resultados[index]
-      }
+  async getCantones(idProvincia: any) {
+    this.cantones = [];
+    var resultados = await this._incidenciasService.cantones(idProvincia);
+    for (let index in resultados) {
+      let canton = {
+        id: +index,
+        descripcion: resultados[index],
+      };
       this.cantones.push(canton);
     }
   }
 
-  async getDistritos(idProvincia:any,idCanton:any){
-    this.distritos=[];
-    var resultados=await this._incidenciasService.distritos(idProvincia,idCanton);
-    for(let index in resultados){
-      let distrito={
-        id:+index,
-        descripcion:resultados[index]
-      }
+  async getDistritos(idProvincia: any, idCanton: any) {
+    this.distritos = [];
+    var resultados = await this._incidenciasService.distritos(
+      idProvincia,
+      idCanton
+    );
+    for (let index in resultados) {
+      let distrito = {
+        id: +index,
+        descripcion: resultados[index],
+      };
       this.distritos.push(distrito);
     }
   }
 
-    onOptionsSelectedProvincia(event:any){
-      this.idProvincia=event.target.value;
-      this.getCantones(event.target.value);
+  onOptionsSelectedProvincia(event: any) {
+    this.idProvincia = event.target.value;
+    this.getCantones(event.target.value);
+    this.provinciaSeleccionada =
+      event.target.options[event.target.selectedIndex].text;
   }
 
-  onOptionsSelectedCantones(event:any){
-    this.getDistritos(this.idProvincia,event.target.value);
+  onOptionsSelectedCantones(event: any) {
+    this.getDistritos(this.idProvincia, event.target.value);
+    this.cantonSeleccionado =
+      event.target.options[event.target.selectedIndex].text;
   }
 
-   InicializarCombos(){
+  onDistritoSelected(event: any) {
+    this.distritoSeleccionado =
+      event.target.options[event.target.selectedIndex].text;
+  }
+
+  InicializarCombos() {
     this.getProvincias();
     this.getCantones(1);
-    this.getDistritos(1,1);
-   }
+    this.getDistritos(1, 1);
+  }
 
   ngOnInit() {
     this.InicializarCombos();
   }
 
-  guardarIncidencia(){
+  guardarIncidencia() {
     this.errores = false;
     this.registroForm.controls['idIncidencia'].setValue(0);
-    this.registroForm.controls['idUsuario'].setValue(localStorage.getItem('idUsuario'));
+    this.registroForm.controls['idUsuario'].setValue(
+      localStorage.getItem('idUsuario')
+    );
     this.registroForm.controls['estado'].setValue(0);
     this.registroForm.controls['latitud'].setValue(this.lat);
     this.registroForm.controls['longitud'].setValue(this.lng);
@@ -134,6 +142,13 @@ export class NuevaComponent implements OnInit {
     this.registroForm.controls['rutaImagen2'].setValue('');
     this.registroForm.controls['rutaImagen3'].setValue('');
     this.registroForm.controls['rutaImagen4'].setValue('');
+
+    this.registroForm.controls['provincia'].setValue(
+      this.provinciaSeleccionada
+    );
+    this.registroForm.controls['canton'].setValue(this.cantonSeleccionado);
+    this.registroForm.controls['distrito'].setValue(this.distritoSeleccionado);
+
     if (!this.registroForm.valid) {
       this.errores = true;
       this.mensajeError = 'Favor revisar el formulario. No es válido.';
