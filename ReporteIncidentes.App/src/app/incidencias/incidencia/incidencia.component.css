@@ -1,0 +1,74 @@
+.card-subtitle {
+  margin: 0;
+  font-weight: 500;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.card-subtitle2 {
+  margin: 0;
+  margin-bottom: 10px !important;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.card-title {
+  font-size: 17px;
+  margin: 3px 0;
+}
+
+.card-text {
+  font-size: 14px;
+  font-weight: 300;
+  color: #7e7e7e;
+  margin-bottom: 0;
+}
+
+.card {
+  margin-bottom: 40px;
+}
+
+.dot {
+  display: inline-block;
+  border-radius: 50%;
+  width: 50%;
+  background-color: #eee;
+  margin: 0 2px;
+  height: 10px;
+  width: 10px;
+}
+
+.dot-finalizado {
+  background-color: #28a745;
+}
+
+.dot-progreso {
+  background-color: #ffc107;
+}
+.dot-registrado {
+  background-color: #17a2b8;
+}
+
+.col-cambiar {
+  padding: 0;
+}
+
+.agm-map {
+  height: 200px !important;
+  width: 100%;
+}
+
+agm-map {
+  height: 200px !important;
+  width: 100%;
+}
+
+.map-container-google {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.img-inc {
+  height: 230px;
+  margin: 10px;
+}

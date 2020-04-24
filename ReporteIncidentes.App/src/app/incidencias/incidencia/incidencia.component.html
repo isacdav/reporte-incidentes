@@ -1,0 +1,82 @@
+<div class="card box-shadow">
+    <div class="card-header">
+        <h4 class="card-title">Número 000{{incidenciaActual.idIncidencia}}
+            <span class="card-subtitle2 badge badge-info float-right"
+                *ngIf="incidenciaActual.estado == 'R'">Registrado</span>
+            <span class="card-subtitle2 badge badge-warning float-right" *ngIf="incidenciaActual.estado == 'A'">En
+                Progreso</span>
+            <span class="card-subtitle2 badge badge-success float-right"
+                *ngIf="incidenciaActual.estado == 'F'">Finalizado</span>
+        </h4>
+    </div>
+    <div class="card-body">
+        <div class="z-depth-1-half map-container map-container-google">
+            <div id="map{{incidenciaActual.idIncidencia}}" class="agm-map">
+                <agm-map [latitude]="lat" [longitude]="lng" [zoom]=15>
+                    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                </agm-map>
+            </div>
+        </div>
+        <button type="button" (click)="open(content)" class="btn btn-secondary btn-sm btn-block">Ver Imágenes</button>
+        <hr>
+        <div class="card-subtitle">
+            {{incidenciaActual.categoria}} a cargo de {{incidenciaActual.empresa}}
+        </div>
+        <div class="card-text">
+            {{incidenciaActual.detalleIncidencia}}
+            <br>
+            {{incidenciaActual.distrito}}, {{incidenciaActual.canton}}, {{incidenciaActual.provincia}}
+            <br>
+            {{incidenciaActual.direccionExacta}}
+        </div>
+        <div *ngIf="esCreador && incidenciaActual.estado != 'F'">
+            <hr>
+            <div class="row">
+                <div class="col card-subtitle2">
+                    Cambiar estado a:
+                </div>
+                <div class="col" *ngIf="incidenciaActual.estado == 'R'">
+                    <a (click)="cambiarEstadoProgreso()" class="badge badge-warning">En Progreso</a>
+                </div>
+                <div class="col" *ngIf="incidenciaActual.estado == 'A'">
+                    <a (click)="cambiarEstadoFinalizado()" class="badge badge-success">Finalizado</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Imágenes de la Incidencia</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row justify-content-md-center">
+            <div class="col">
+                <img class="img-inc" *ngIf="incidenciaActual.rutaImagen1 != ''" src="{{incidenciaActual.rutaImagen1}}" alt="">
+            </div>
+            <div class="col">
+                <img class="img-inc" *ngIf="incidenciaActual.rutaImagen2 != ''" src="{{incidenciaActual.rutaImagen2}}" alt="">
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col">
+                <img class="img-inc" *ngIf="incidenciaActual.rutaImagen3 != ''" src="{{incidenciaActual.rutaImagen3}}" alt="">
+            </div>
+            <div class="col">
+                <img class="img-inc" *ngIf="incidenciaActual.rutaImagen4 != ''" src="{{incidenciaActual.rutaImagen4}}" alt="">
+            </div>
+        </div>
+        <div *ngIf="incidenciaActual.rutaImagen1 == '' &&
+                   incidenciaActual.rutaImagen2 == '' &&
+                   incidenciaActual.rutaImagen3 == '' &&
+                   incidenciaActual.rutaImagen4 == ''">
+            <div class="alert alert-danger">
+                La incidencia fue registrada sin imágenes
+            </div>
+        </div>
+    </div>
+</ng-template>
