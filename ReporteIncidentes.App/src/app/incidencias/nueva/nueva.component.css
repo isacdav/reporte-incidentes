@@ -1,6 +1,7 @@
 .imgagenes {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 125px;
+  margin: 1%;
 }
 
 .custom-file-input ~ .custom-file-label::after {
@@ -11,3 +12,4 @@ agm-map {
   height: 400px !important;
   width: 100%;
 }
+

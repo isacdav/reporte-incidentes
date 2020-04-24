@@ -28,4 +28,8 @@ export class IncidenciasService {
     );
   }
 
+  public imageUploader(formData:FormData):Observable<any>{
+    return this.http.post('https://reporteincidencias.azurewebsites.net/api/Upload',formData);
+  }
+
 }

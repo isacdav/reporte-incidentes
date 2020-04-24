@@ -130,15 +130,20 @@
   <br />
   <h5>Fotografías</h5>
   <hr />
+  <img src={{displayedImage1}} class="imgagenes" alt="">
+  <img src={{displayedImage2}} class="imgagenes" alt="">
+  <img src={{displayedImage3}} class="imgagenes" alt="">
+  <img src={{displayedImage4}} class="imgagenes" alt="">
   <div class="form-group">
     <br />
     <div class="input-group mb-3">
       <div class="custom-file">
-        <input type="file" class="custom-file-input" (change)="processFile(imageInput)" />
+        <input #file type="file" class="custom-file-input" (change)="upload(file.files)" [disabled]="maximoImagenes"/>
         <label class="custom-file-label" accept="image/png, image/jpeg">
           Seleccionar Imágenes
         </label>
       </div>
+      <br />
     </div>
   </div>
   <div class="text-center">
@@ -147,6 +152,12 @@
     </div>
     <div class="alert alert-success" *ngIf="exito">
       {{ mensajeExito }}
+    </div>
+    <div class="alert alert-danger" *ngIf="erroresCarga">
+      {{message}}
+    </div>
+    <div class="alert alert-success" *ngIf="exitoCarga">
+      {{message}}
     </div>
     <br />
     <hr />
