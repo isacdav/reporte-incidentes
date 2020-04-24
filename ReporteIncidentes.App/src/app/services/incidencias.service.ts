@@ -20,4 +20,12 @@ export class IncidenciasService {
   public distritos(idProvincia:any,idDistritos:any){
     return this.http.get('https://ubicaciones.paginasweb.cr/provincia/'+idProvincia+'/canton/'+idDistritos+'/distritos.json').toPromise();
   }
+
+  public registrar(incidenciasData: any): Observable<any> {
+    return this.http.post(
+      'https://reporteincidencias.azurewebsites.net//api/Incidencias/InsertarIncidencias',
+      incidenciasData
+    );
+  }
+
 }

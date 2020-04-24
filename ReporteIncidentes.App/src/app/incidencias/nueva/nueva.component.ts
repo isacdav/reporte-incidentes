@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Router } from '@angular/router';
 import { IncidenciasService } from 'src/app/services/incidencias.service';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-nueva',
@@ -10,6 +11,10 @@ import { IncidenciasService } from 'src/app/services/incidencias.service';
   styleUrls: ['./nueva.component.css'],
 })
 export class NuevaComponent implements OnInit {
+  errores: boolean = false;
+  mensajeError: string = 'Ha ocurrido un error';
+  exito: boolean = false;
+  mensajeExito: string = 'Datos ingresados correctamente';
   name = 'Mapa';
   lat: any;
   lng: any;
@@ -17,7 +22,41 @@ export class NuevaComponent implements OnInit {
   cantones=[];
   distritos=[];
   idProvincia=0;
-  constructor(public usuarioSrv: UsuarioService, private router: Router,private _incidenciasService:IncidenciasService) {
+  registroForm=this.fb.group({
+    idIncidencia:[],
+    idUsuario:[],
+    categoria:['', Validators.required],
+    empresa:['', Validators.required],
+    provincia:['', Validators.required],
+    canton:['', Validators.required],
+    distrito:['', Validators.required],
+    direccionExacta:[
+      '',
+      [
+        Validators.required,
+        Validators.maxLength(500),
+      ],
+    ],
+    latitud: [],
+    longitud: [],
+    rutaImagen1: [],
+    rutaImagen2: [],
+    rutaImagen3: [],
+    rutaImagen4: [],
+    detalleIncidencia: [
+      '',
+      [
+        Validators.required,
+        Validators.maxLength(500),
+      ],
+    ],
+    estado: []
+  });
+  constructor(
+      public usuarioSrv: UsuarioService, 
+      private router: Router,
+      private _incidenciasService:IncidenciasService,
+      private fb: FormBuilder,) {
     if (this.usuarioSrv.estaLogueado()) {
       this.router.navigate(['/loguearse']);
     }
@@ -74,7 +113,47 @@ export class NuevaComponent implements OnInit {
     this.getDistritos(this.idProvincia,event.target.value);
   }
 
-  ngOnInit() {
+   InicializarCombos(){
     this.getProvincias();
+    this.getCantones(1);
+    this.getDistritos(1,1);
+   }
+
+  ngOnInit() {
+    this.InicializarCombos();
+  }
+
+  guardarIncidencia(){
+    this.errores = false;
+    this.registroForm.controls['idIncidencia'].setValue(0);
+    this.registroForm.controls['idUsuario'].setValue(localStorage.getItem('idUsuario'));
+    this.registroForm.controls['estado'].setValue(0);
+    this.registroForm.controls['latitud'].setValue(this.lat);
+    this.registroForm.controls['longitud'].setValue(this.lng);
+    this.registroForm.controls['rutaImagen1'].setValue('');
+    this.registroForm.controls['rutaImagen2'].setValue('');
+    this.registroForm.controls['rutaImagen3'].setValue('');
+    this.registroForm.controls['rutaImagen4'].setValue('');
+    if (!this.registroForm.valid) {
+      this.errores = true;
+      this.mensajeError = 'Favor revisar el formulario. No es válido.';
+      return;
+    }
+
+    this._incidenciasService.registrar(this.registroForm.value).subscribe(
+      (resp) => {
+        if (resp.hayError) {
+          this.errores = true;
+          this.mensajeError = resp.mensajeError;
+        } else {
+          this.exito = true;
+          this.mensajeExito = 'Incidencia ingresada correctamente';
+        }
+      },
+      (errorResp) => {
+        this.errores = true;
+        this.mensajeError = errorResp.error.title;
+      }
+    );
   }
 }

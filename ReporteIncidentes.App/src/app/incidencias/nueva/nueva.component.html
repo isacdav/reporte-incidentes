@@ -1,4 +1,4 @@
-<form action="">
+<form [formGroup]="registroForm" (ngSubmit)="guardarIncidencia()">
   <br />
   <h5>Ubicación de la Incidencia</h5>
   <hr />
@@ -13,22 +13,34 @@
       </div>
       <div class="col-4">
         <label id="lblProvincia">Provincia</label>
-        <select  class="form-control" (change)='onOptionsSelectedProvincia($event)' id="dpnProvincia">
-          <option disabled selected value="0">Seleccionar...</option>  
+        <select  class="form-control" (change)='onOptionsSelectedProvincia($event)' id="dpnProvincia" formControlName="provincia">
           <option *ngFor="let provincia of provincias" [value]="provincia.id">{{provincia.descripcion}}</option>
        </select>
+       <div *ngIf="registroForm.controls.provincia.touched">
+        <div *ngIf="registroForm.controls.provincia.errors?.required" class="form-text text-danger small">
+          Seleccione una provincia
+        </div>
+      </div>
         <br />
         <label id="lblCanton">Cantón</label>
-        <select class="form-control" id="dpnCantones" (change)='onOptionsSelectedCantones($event)'>
-          <option disabled selected value="0">Seleccionar...</option>  
+        <select class="form-control" id="dpnCantones" (change)='onOptionsSelectedCantones($event)' formControlName="canton">
           <option *ngFor="let canton of cantones" [value]="canton.id">{{canton.descripcion}}</option>
         </select>
+        <div *ngIf="registroForm.controls.canton.touched">
+          <div *ngIf="registroForm.controls.canton.errors?.required" class="form-text text-danger small">
+            Seleccione un canton
+          </div>
+        </div>
         <br />
         <label id="lblDistrito">Distrito</label>
-        <select class="form-control" id="dpnDistritos">
-          <option disabled selected value="0">Seleccionar...</option>  
+        <select class="form-control" id="dpnDistritos" formControlName="distrito">
           <option *ngFor="let distrito of distritos" [value]="distrito.id">{{distrito.descripcion}}</option>
         </select>
+        <div *ngIf="registroForm.controls.distrito.touched">
+          <div *ngIf="registroForm.controls.distrito.errors?.required" class="form-text text-danger small">
+            Seleccione un distrito
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -38,8 +50,7 @@
   <div class="row">
     <div class="col-6">
       <label id="lblCategoria">Categoría</label>
-      <select class="form-control">
-        <option>Seleccionar...</option>
+      <select class="form-control" formControlName="categoria">
         <option>Puente</option>
         <option>Carretera</option>
         <option>Tubería dañada</option>
@@ -49,11 +60,15 @@
         <option>Derrumbe</option>
         <option>Otro</option>
       </select>
+      <div *ngIf="registroForm.controls.categoria.touched">
+        <div *ngIf="registroForm.controls.categoria.errors?.required" class="form-text text-danger small">
+          Seleccione una categoria
+        </div>
+      </div>
     </div>
     <div class="col-6">
       <label id="lblEmpresa">Empresa Responsable</label>
-      <select class="form-control">
-        <option>Seleccionar...</option>
+      <select class="form-control" formControlName="empresa">
         <option>Municipalidad</option>
         <option>MOPT</option>
         <option>Conavi</option>
@@ -62,6 +77,11 @@
         <option>RACSA</option>
         <option>Otro</option>
       </select>
+      <div *ngIf="registroForm.controls.empresa.touched">
+        <div *ngIf="registroForm.controls.empresa.errors?.required" class="form-text text-danger small">
+          Seleccione una empresa
+        </div>
+      </div>
     </div>
   </div>
   <br />
@@ -70,7 +90,17 @@
       <label>Dirección Exacta</label>
       <div class="form-group">
         <textarea id="txtDireccion" col-4s="100" rows="5" placeholder="Dirección exacta"
-          class="form-control"></textarea>
+          class="form-control" formControlName="direccionExacta"></textarea>
+      </div>
+      <div *ngIf="registroForm.controls.direccionExacta.touched">
+        <div *ngIf="registroForm.controls.direccionExacta.errors?.required" class="form-text text-danger small">
+          La dirección exacta es requerida
+        </div>
+        <div *ngIf="
+            registroForm.controls.direccionExacta.errors?.maxlength 
+          " class="form-text text-danger small">
+          La dirección de la incidencia debe de ser menor a 500 caracteres
+        </div>
       </div>
     </div>
     <div class="col-6">
@@ -79,7 +109,17 @@
           <label>Detalle del incidente</label>
           <div>
             <textarea id="txtDetalle" col-4s="100" rows="5" placeholder="Por favor escriba los detalles del incidente"
-              class="form-control"></textarea>
+              class="form-control" formControlName="detalleIncidencia"></textarea>
+          </div>
+          <div *ngIf="registroForm.controls.detalleIncidencia.touched">
+            <div *ngIf="registroForm.controls.detalleIncidencia.errors?.required" class="form-text text-danger small">
+              El detalle de la incidencia es requerido
+            </div>
+            <div *ngIf="
+                registroForm.controls.detalleIncidencia.errors?.maxlength 
+              " class="form-text text-danger small">
+              El detalle de la incidencia debe de ser menor a 500 caracteres
+            </div>
           </div>
         </div>
       </div>
@@ -89,16 +129,10 @@
   <h5>Fotografías</h5>
   <hr />
   <div class="form-group">
-    <div class="imagenes">
-      <img height="150" width="150" src="~/img/22887717Master.jpg" />
-      <img height="150" width="150" src="~/img/5a0e52c2ad75c.jpeg" />
-      <img height="150" width="150" src="~/img/puente4.jpg" />
-      <img height="150" width="150" src="~/img/psoe-pide-6.jpg" />
-    </div>
     <br />
     <div class="input-group mb-3">
       <div class="custom-file">
-        <input type="file" class="custom-file-input" />
+        <input type="file" class="custom-file-input" (change)="processFile(imageInput)"/>
         <label class="custom-file-label" accept="image/png, image/jpeg">
           Seleccionar Imágenes
         </label>
@@ -106,8 +140,15 @@
     </div>
   </div>
   <div class="text-center">
+    <div class="alert alert-danger" *ngIf="errores">
+      {{ mensajeError }}
+    </div>
+    <div class="alert alert-success" *ngIf="exito">
+      {{ mensajeExito }}
+    </div>
+    <br />
     <hr />
-    <button class="btn btn-dark">Registrar Incidencia</button>
+    <input type="submit" class="btn btn-dark" value="Registrarme" [disabled]="!registroForm.valid" />
     <hr />
   </div>
 </form>
