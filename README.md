@@ -23,6 +23,3 @@ Consiste en una herramienta que permite reportar incidencias, ver una lista y ca
 * **Isaac Alfaro** | [isaac16av](https://github.com/isaac16av)
 * **Steven Guevara** | [guevaracarrillo](https://github.com/guevaracarrillo)
 * **Moisés Fallas** | [moiso0496](https://github.com/moiso0496)
-
-## Licencia ⚖
-[MIT](https://choosealicense.com/licenses/mit/)
