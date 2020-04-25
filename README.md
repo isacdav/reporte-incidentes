@@ -1,27 +1,28 @@
-# ReporteIncidentes
+# Reporte de Incidentes 📋
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.25.
+Este proyecto se trata de un tabajo universitario para el curso de Programación de Aplicaciones y Servicios Web, en ULACIT. Primer cuatrimestre del 2020.
 
-## Development server
+## Descripción del proyecto 📄
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Consiste en una herramienta que permite reportar incidencias, ver una lista y cambiar el estado de las mismas. Incluyendo registro e inicio de sesión para usuarios.
 
-## Code scaffolding
+## Desarrollado con 🛠️
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Front-end:** Angular 8
+- **Back-end:** .Net core 2
+- **Base de datos:** SQL Server
 
-## Build
+### Otras tecnologías utilizadas ⚙️
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+* Bootstrap 4
+* NgBootstrap 
+* Google Maps
+* Swagger API
 
-## Running unit tests
+## Colaboradores 👨‍💻
+* **Isaac Alfaro** | [isaac16av](https://github.com/isaac16av)
+* **Steven Guevara** | [guevaracarrillo](https://github.com/guevaracarrillo)
+* **Moisés Fallas** | [moiso0496](https://github.com/moiso0496)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Licencia ⚖
+[MIT](https://choosealicense.com/licenses/mit/)
