@@ -167,9 +167,7 @@ export class NuevaComponent implements OnInit {
           this.mensajeError = resp.mensajeError;
         } else {
           this.exito = true;
-          this.mensajeExito = 'Incidencia ingresada correctamente';     
-
-          
+          this.mensajeExito = 'Incidencia ingresada correctamente'; 
           this.LimpiarImagenes();   
           this.reloadForm();  
         }
@@ -177,6 +175,7 @@ export class NuevaComponent implements OnInit {
       (errorResp) => {
         this.errores = true;
         this.mensajeError = errorResp.error.title;
+        this.EliminarMensaje();
       }
     );
   }
@@ -192,15 +191,18 @@ export class NuevaComponent implements OnInit {
           if (resp.hayError) {
             this.errores = true;
             this.mensajeError = resp.mensajeError;
+            this.EliminarMensaje();
           } else {
             this.AsignaRutaImagenes(resp);
             this.exitoCarga = true;
             this.message = resp.mensaje;
+            this.EliminarMensaje();
           }
         },
         (errorResp) => {
           this.erroresCarga = true;
           this.message = errorResp.error.title;
+          this.EliminarMensaje();
         }
       );   
   }
@@ -242,5 +244,12 @@ export class NuevaComponent implements OnInit {
   async reloadForm(){
     await this.delay(2000);
     window.location.reload();
+  }
+
+  async EliminarMensaje(){
+    await this.delay(10000);
+    this.erroresCarga=false;
+    this.exitoCarga=false;
+    this.errores = false;
   }
 }
