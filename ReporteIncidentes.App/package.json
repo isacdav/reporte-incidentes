@@ -23,7 +23,7 @@
     "@azure/storage-blob": "^12.1.1",
     "@ng-bootstrap/ng-bootstrap": "^5.3.1",
     "bootstrap": "^4.4.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "popper.js": "^1.16.1",
     "rxjs": "~6.4.0",
     "rxjs-compat": "^6.5.5",
