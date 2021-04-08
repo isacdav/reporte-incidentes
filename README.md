@@ -20,6 +20,6 @@ Consiste en una herramienta que permite reportar incidencias, ver una lista y ca
 * Swagger API
 
 ## Colaboradores 👨‍💻
-* **Isaac Alfaro** | [isaac16av](https://github.com/isaac16av)
+* **Isaac Alfaro** | [isacdav](https://github.com/isacdav)
 * **Steven Guevara** | [guevaracarrillo](https://github.com/guevaracarrillo)
 * **Moisés Fallas** | [moiso0496](https://github.com/moiso0496)
